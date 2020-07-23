@@ -1,0 +1,47 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Organization Details</title>
+        <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet"> 
+    </head>
+    <body>
+        <div class="container">
+            <h2>Organization Details</h2>
+            <hr/>
+            <div class="navbar">
+                <ul class="nav nav-tabs">
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/">Home</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/displayHeroesPage">Heroes & Villains</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/displayLocationsPage">Locations</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/displayOrganizationsPage">Organizations</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/displaySightingsPage">Sightings</a></li>
+                </ul>    
+            </div>
+            <p>Name: <c:out value="${organization.name}"/></p>
+            <p>Address: <c:out value="${organization.location.street}"/></p> 
+            <p><c:out value="${organization.location.city}"/>, <c:out value="${organization.location.state}"/> <c:out value="${organization.location.zip}"/></p>
+            <p>Description: <c:out value="${organization.description}"/></p>
+            <p>Phone: <c:out value="${organization.phone}"/></p>
+            <p>Email: <c:out value="${organization.email}"/></p>
+            <p>Organization Members:
+                <c:choose>
+                    <c:when test="${organization.memberList == null}">
+                        No members found.
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="currentMember" items="${organization.memberList}">
+                            <c:out value="${currentMember.name}"/>, 
+                        </c:forEach>       
+                    </c:otherwise>
+                </c:choose>
+            </p>
+        </div>
+        <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    </body>
+</html>
